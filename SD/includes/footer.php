@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer>
+<footer class="bg-dark">
 	<ul class="footer-links">
 		<li><a href="https://18date.net/" target="_blank" class="m-0">18Date</a> - </li>
 		<li><a href="https://sex55.net/" target="_blank" class="m-0">Sex55</a> - </li>

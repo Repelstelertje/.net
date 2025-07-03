@@ -36,11 +36,11 @@ include $base . '/includes/header.php';
   $country = isset($_GET['country']) ? $_GET['country'] : '';
   switch ($country) {
     case 'nl':
-      $api_url = api_base('nl') . '/profile/get0/6/';
+      $api_url = api_base('nl') . '/profile/get0/80/';
       $ref_id = '80';
       break;
     case 'be':
-      $api_url = api_base('be') . '/profile/get0/7/';
+      $api_url = api_base('be') . '/profile/get0/83/';
       $ref_id = '83';
       break;
     case 'uk':
