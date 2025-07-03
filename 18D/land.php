@@ -74,7 +74,6 @@ $landInfo = ${$info['landVar']};
 
 $canonical = $info['canonical'];
 $pageTitle = $info['pageTitle'];
-define('TITLE', $info['title']);
 $metaDescription = $landInfo['meta'];
 
 include $base . '/includes/header.php';

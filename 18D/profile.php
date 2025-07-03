@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define("TITLE", "Daten");
 include $base . '/includes/header.php';
 ?>
 <!-- Page Content -->
