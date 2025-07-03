@@ -39,7 +39,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Nederland'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Nederland'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>  
@@ -83,7 +83,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in België'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in België'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>
@@ -127,7 +127,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in United Kingdom'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in United Kingdom'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>
@@ -171,7 +171,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Duitsland'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Duitsland'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>
@@ -215,7 +215,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Oostenrijk'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Oostenrijk'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>
@@ -259,7 +259,7 @@ include $base . '/includes/header.php';
         </div>
         <div class="col-lg-3 col-md-6 mb-4 portfolio-item profile-card" :id="'profile-' + profile.id" v-for="profile in filtered_profiles">
             <div class="card h-100">
-                <a :href="'daten-met-' + slugify(profile.name) + '?id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Zwitserland'" @error="imgError"></a>
+                <a :href="'profile.php?country=<?php echo $country; ?>&id=' + profile.id"><img class="card-img-top" :src="profile.src.replace('150x150', '300x300')" :alt="profile.name + ' daten in Zwitserland'" @error="imgError"></a>
                 <div class="card-body">
                     <div class="card-top">
                         <h4 class="card-title">{{ profile.name }}</h4>
