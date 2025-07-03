@@ -42,23 +42,17 @@ include $base . '/includes/header.php';
       $ref_id = '32';
       break;
     case 'de':
-      $api_url = api_base('de') . '/profile/get0/240/';
-      $ref_id = '32';
-      break;
     case 'at':
-      $api_url = api_base('at') . '/profile/get0/640/';
-      $ref_id = '32';
-      break;
     case 'ch':
-      $api_url = api_base('ch') . '/profile/get0/540/';
+      $api_url = api_base('de') . '/profile/get/';
       $ref_id = '32';
       break;
     case 'uk':
-      $api_url = api_base('uk') . '/profile/get0/103/';
+      $api_url = api_base('uk') . '/profile/get/';
       $ref_id = '32';
       break;
     default:
-      $api_url = api_base() . '/profile/get0/103';
+      $api_url = api_base() . '/profile/get/';
       $ref_id = '32';
   }
 ?>
