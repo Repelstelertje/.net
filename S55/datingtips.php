@@ -1,6 +1,5 @@
 <?php 
 $base = __DIR__;
-define("TITLE", "Datingtips");
 
 $canonical = 'https://sex55.net/datingtips';
 $pageTitle = 'Datingtips | sex55.net';

@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Cookiebeleid');
 $canonical = 'https://shemaledaten.net/cookie-policy';
 $pageTitle = 'Cookiebeleid | shemaledaten.net';
 include $base . '/includes/header.php';

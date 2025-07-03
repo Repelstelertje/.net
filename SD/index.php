@@ -1,7 +1,7 @@
 <?php
 $base = __DIR__;
-	define("TITLE", "Home");
-  include $base . '/includes/header.php';
+$pageTitle = 'Shemale Sexdating | shemaledaten.net';
+include $base . '/includes/header.php';
 ?>
 
 <div class="container">
