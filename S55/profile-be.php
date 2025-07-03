@@ -1,6 +1,5 @@
 <?php
-	define("TITLE", "Daten");
-	include('includes/header.php');
+include('includes/header.php');
 ?>
 <!-- Page Content -->
 <div class="container" id="profiel" v-cloak>

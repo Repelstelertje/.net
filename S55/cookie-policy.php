@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Cookiebeleid');
 $canonical = 'https://sex55.net/cookie-policy';
 $pageTitle = 'Cookiebeleid | sex55.net';
 include $base . '/includes/header.php';

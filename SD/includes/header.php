@@ -22,7 +22,10 @@
     'tips_title_prefix' => 'Datingtips',
   ];
 
-  list($canonical, $pageTitle, $ogImage) = generate_canonical_meta($cfg, isset($province) ? $province : []);
+  list($generatedCanonical, $generatedPageTitle, $generatedOgImage) = generate_canonical_meta($cfg, isset($province) ? $province : []);
+  $canonical = isset($canonical) ? $canonical : $generatedCanonical;
+  $pageTitle = isset($pageTitle) ? $pageTitle : $generatedPageTitle;
+  $ogImage   = isset($ogImage) ? $ogImage : $generatedOgImage;
 
 ?>
 

@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Daten in');
 require_once $base . '/includes/utils.php';
 
 $country = isset($_GET['country']) ? strtolower($_GET['country']) : '';
@@ -43,6 +42,7 @@ if (!$province) {
 }
 
 $metaDescription = $province['meta'];
+$pageTitle = $province['title'] . ' | sex55.net';
 include $base . '/includes/header.php';
 ?>
 
