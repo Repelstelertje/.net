@@ -70,11 +70,6 @@ hr {
 .bg-dark {
 	background-color: #dfb8ea !important;
 }
-.nav-pag {
-	margin: 10px auto;
-	display: block;
-	width: 100%;
-}
 .navbar-dark .navbar-nav .nav-link {
 	color: #fff;
 }
