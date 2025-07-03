@@ -23,7 +23,7 @@ include $base . '/includes/header.php';
           <li class="list-group-item">Relatiestatus: {{ profile.relationship }}</li>
           <li class="list-group-item">Lengte: {{ profile.length }}</li>
         </ul>
-        <a :href="profile.url + '?ref=' + ref_id + '&ref=32'" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
+        <a :href="profile.url + '?ref=32'" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
       </div>
   </div><!-- /.row -->
 </div>
@@ -64,7 +64,6 @@ include $base . '/includes/header.php';
 ?>
 <script>
   var api_url = "<?= $api_url ?>";
-  var ref_id = "<?= $ref_id ?>"; //de ref_id vd landingwebsite
   var profile_slug = "<?= isset($_GET['slug']) ? htmlspecialchars($_GET['slug'], ENT_QUOTES, 'UTF-8') : '' ?>";
 </script>
 
