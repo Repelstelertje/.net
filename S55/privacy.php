@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Privacybeleid');
 $canonical = 'https://sex55.net/privacy';
 $pageTitle = 'Privacybeleid | sex55.net';
 include $base . '/includes/header.php';

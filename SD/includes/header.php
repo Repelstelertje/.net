@@ -2,31 +2,30 @@
   $companyName = "ShemaleDaten.net";
   include $base . '/includes/nav_items.php';
   // Config is required for API lookups when rendering profile pages
-  include_once $base . '/config.php';
-  /**
-   * Convert a string to a URL friendly slug.
-   *
-   * @param string $text
-   * @return string
-   */
-  function slugify($text) {
-    $text = strtolower(trim($text));
-    $text = preg_replace('/[^a-z0-9]+/', '-', $text);
-    return trim($text, '-');
-  }
+  include_once $base . '/includes/config.php';
+  require_once $base . '/includes/utils.php';
+  require_once $base . '/includes/site.php';
 
-  // Control error visibility through an environment variable. By default
-  // errors are hidden in production unless APP_DEBUG is truthy.
-  $appDebug = getenv('APP_DEBUG');
+  configure_error_handling();
 
-  if (filter_var($appDebug, FILTER_VALIDATE_BOOLEAN)) {
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    error_reporting(E_ALL);
-  } else {
-    ini_set('display_errors', '0');
-    ini_set('display_startup_errors', '0');
-  }
+  $cfg = [
+    'base_url' => $BASE_URL,
+    'site_name' => 'shemaledaten.net',
+    'default_title' => 'Shemale Sexdating | shemaledaten.net',
+    'default_og_image' => $BASE_URL . '/img/fb.png',
+    'item_prefix' => 'shemale',
+    'item_remove_regex' => '/^(?:sexdate|shemale)-/',
+    'item_page_title_prefix' => 'Shemale',
+    'slug_prefix' => 'sexdate',
+    'profile_prefix' => 'shemale',
+    'missing_profile_prefix' => 'Shemale',
+    'tips_title_prefix' => 'Datingtips',
+  ];
+
+  list($generatedCanonical, $generatedPageTitle, $generatedOgImage) = generate_canonical_meta($cfg, isset($province) ? $province : []);
+  $canonical = isset($canonical) ? $canonical : $generatedCanonical;
+  $pageTitle = isset($pageTitle) ? $pageTitle : $generatedPageTitle;
+  $ogImage   = isset($ogImage) ? $ogImage : $generatedOgImage;
 
 ?>
 
@@ -63,114 +62,7 @@
 <meta name="theme-color" content="#ffffff">
 
 <?php
-  $canonical = $canonical ?? 'https://shemaledaten.net';
-  $pageTitle = $pageTitle ?? 'Shemale Sexdating | shemaledaten.net';
-  $ogImage = $ogImage ?? 'https://shemaledaten.net/img/fb.png';
-
-  if(isset($_GET['item'])){
-    $item = filter_var($_GET['item'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-    if(basename($_SERVER['PHP_SELF']) === 'datingtips.php'){
-      switch($item){
-        case 'datingtips':
-          $canonical = 'https://shemaledaten.net/datingtips';
-          $pageTitle = 'Datingtips | shemaledaten.net';
-          break;
-        case 'nl':
-          $canonical = 'https://shemaledaten.net/datingtips-nederland';
-          $pageTitle = 'Datingtips Nederland | shemaledaten.net';
-          break;
-        case 'be':
-          $canonical = 'https://shemaledaten.net/datingtips-belgie';
-          $pageTitle = 'Datingtips België | shemaledaten.net';
-          break;
-        case 'de':
-          $canonical = 'https://shemaledaten.net/datingtips-duitsland';
-          $pageTitle = 'Datingtips Duitsland | shemaledaten.net';
-          break;
-        case 'uk':
-          $canonical = 'https://shemaledaten.net/datingtips-verenigd-koninkrijk';
-          $pageTitle = 'Datingtips Verenigd Koninkrijk | shemaledaten.net';
-          break;
-        case 'at':
-          $canonical = 'https://shemaledaten.net/datingtips-oostenrijk';
-          $pageTitle = 'Datingtips Oostenrijk | shemaledaten.net';
-          break;
-        case 'ch':
-          $canonical = 'https://shemaledaten.net/datingtips-zwitserland';
-          $pageTitle = 'Datingtips Zwitserland | shemaledaten.net';
-          break;
-      }
-    } else {
-      $item = preg_replace('/^(?:sexdate|shemale)-/', '', $item);
-      $canonical = 'https://shemaledaten.net/shemale-' . $item;
-      $pageTitle = 'Shemale ' . $item . ' | shemaledaten.net';
-      if(isset($province['img'])){
-        $ogImage = 'https://shemaledaten.net/img/front/' . $province['img'] . '.jpg';
-      }
-    }
-  } elseif(isset($_GET['id'])){
-    $id = filter_var($_GET['id'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $country = isset($_GET['country']) ? $_GET['country'] : '';
-    switch ($country) {
-      case 'nl':
-        $api_url = api_base('nl') . '/profile/get0/6/';
-        break;
-      case 'be':
-        $api_url = api_base('be') . '/profile/get0/7/';
-        break;
-      case 'de':
-      case 'at':
-      case 'ch':
-        $api_url = api_base('de') . '/profile/get/';
-        break;
-      case 'uk':
-        $api_url = api_base('uk') . '/profile/get/';
-        break;
-      default:
-        $api_url = api_base() . '/profile/get/';
-    }
-    $profile_json = @file_get_contents($api_url . $id);
-    $profile_name = '';
-    $profile_img = '';
-    if($profile_json){
-      $data = json_decode($profile_json, true);
-      if(isset($data['profile']['name'])){
-        $profile_name = $data['profile']['name'];
-      }
-      if(isset($data['profile']['profile_image_big'])){
-        $profile_img = $data['profile']['profile_image_big'];
-      }
-    }
-    if($profile_name){
-      $slug = slugify($profile_name);
-      $canonical = 'https://shemaledaten.net/shemale-' . $slug;
-      $pageTitle = 'Date ' . htmlspecialchars($profile_name, ENT_QUOTES, 'UTF-8');
-    } else {
-      $canonical = 'https://shemaledaten.net/profile?id=' . $id;
-      $pageTitle = 'Shemale ' . $id . ' | shemaledaten.net';
-    }
-    if($profile_img){
-      $ogImage = $profile_img;
-    }
-  } elseif(isset($_GET['slug'])){
-    $slugParam = filter_var($_GET['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $canonical = 'https://shemaledaten.net/sexdate-' . $slugParam;
-    $pageTitle = 'Shemale ' . $slugParam . ' | shemaledaten.net';
-  }
-
-  echo '<link rel="canonical" href="' . $canonical . '" >';
-  echo '<title>' . htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . '</title>';
-  echo '<meta property="og:type" content="website">';
-  echo '<meta property="og:url" content="' . $canonical . '">';
-  echo '<meta property="og:title" content="' . htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . '">';
-  echo '<meta property="og:description" content="' . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . '">';
-  echo '<meta property="og:image" content="' . $ogImage . '">';
-  // Twitter Card metadata
-  echo '<meta name="twitter:card" content="summary_large_image">';
-  echo '<meta name="twitter:title" content="' . htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . '">';
-  echo '<meta name="twitter:description" content="' . htmlspecialchars($description, ENT_QUOTES, 'UTF-8') . '">';
-  echo '<meta name="twitter:image" content="' . $ogImage . '">';
+  output_meta_tags($canonical, $pageTitle, $description, $ogImage);
 ?>
 
 <!-- Bootstrap core CSS -->

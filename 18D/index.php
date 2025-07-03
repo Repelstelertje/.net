@@ -1,6 +1,6 @@
 <?php
 $base = __DIR__;
-define("TITLE", "Home");
+$pageTitle = '18+ Sexdating | 18Date.net';
 include $base . '/includes/header.php';
 ?>
 

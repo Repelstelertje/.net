@@ -1,7 +1,6 @@
 <?php
 $base = __DIR__;
-	define("TITLE", "Daten");
-  include $base . '/includes/header.php';
+include $base . '/includes/header.php';
 ?>
 <!-- Page Content -->
     <div class="container" id="profiel">
@@ -12,7 +11,7 @@ $base = __DIR__;
         <div class="row">
 
           <div class="col-sm-4 text-center">
-            <img class="profile-pic" :src="profile.profile_image_big" @error="imgError">
+            <img class="profile-pic" :src="profile.profile_image_big" @error="imgError" :alt="'Dating in ' + profile.province + ' met ' + profile.name" :title="'Profielfoto van ' + profile.name">
           </div>
 
           <div class="col-sm-8">
