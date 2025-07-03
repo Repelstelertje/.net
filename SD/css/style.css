@@ -1,0 +1,235 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template-overviews/heroic-features)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+[v-cloak] {
+  display: none;
+}
+html {
+  /* Offset scrolling to account for fixed header */
+  scroll-padding-top: 56px;
+}
+body {
+	color: #0B132B;
+  	padding-top: 56px;
+  	background-image: linear-gradient(to right, #232a40, #e6e7e9, #232a40);
+  	position: relative;
+	padding-bottom: 78px;
+	min-height: 100vh;
+}
+main {
+  margin: 40px 0;
+}
+.navbar-brand {
+	font-weight: bold;
+	color: #5BC0BE !important;
+}
+a {
+	color: #5BC0BE;
+	text-decoration: none !important;
+}
+a:hover{
+	color: #6FFFE9;
+}
+hr {
+	margin: 0.5rem 0;
+}
+.card {
+	border: 1px solid #eee;
+}
+.card-title {
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.list-group-item {
+    background: none;
+	border: none !important;
+	padding: .0rem 0rem;
+}
+.list-group-item:before {
+    font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+  body {
+  	font-size: 1rem;
+  	padding-bottom: 230px;
+  }
+}
+.logo {
+	max-height: 30px;
+}
+.bg-dark {
+	background-color: #0B132B !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+	color: #5BC0BE;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+	color: #6FFFE9;
+}
+.navbar-dark .navbar-nav .nav-link:selected {
+	color: #6FFFE9;
+}
+.navbar-dark .navbar-toggler {
+	color: rgba(255,255,255) !important;
+    border-color: rgba(255,255,255) !important;
+}
+.dropdown-menu {
+	color: #fff;
+	background-color: #6FFFE9;
+	border: none;
+}
+.dropdown-item {
+	color: #0B132B;
+	padding: .25rem 0.5rem;
+}
+.dropdown-item:focus {
+	color: #fff;
+	background-color: #6FFFE9;
+}
+#provDropdown {
+	margin: 5px;
+}
+.jumbotron {
+	padding: 1rem;
+	background-color: rgba(255, 255, 255, 0.8);
+}
+.jumbotron[id^="land-"],
+.country-section {
+        /* Prevent fixed header from covering anchors */
+        scroll-margin-top: 56px;
+}
+.align-center {
+	display: block;
+	margin: 0px auto;
+	width: 100%;
+}
+#top-banner, #footer-banner {
+	margin: 20px auto;
+	max-width: 640px;
+}
+.prov-btn {
+	margin: 5px;
+}
+.btn-primary {
+	color: #fff;
+    background-color: #5BC0BE;
+    border: none;
+}
+.btn-primary:hover {
+	color: #0B132B;
+    background-color: #6FFFE9;
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+	color: #0B132B;
+	background-color: #6FFFE9;
+}
+.button-area {
+	display: inline-flex;
+}
+.online {
+	background-color: #0B132B;
+}
+/* Nieuwe profielen */
+.new-profiles {
+	max-width: 200px;
+	margin: 5px auto;
+}
+/* Date ervaringen */
+.ervaringen {
+	display: inline-flex;
+	max-width: 30%;
+	padding: 10px;
+} 
+.stelletje {
+	line-height: 36px;
+	font-weight: 500;
+}
+/*	Provincie-pagina */
+.card-subtitle {
+	color: #0B132B;
+	margin-bottom: 10px;
+}
+.portfolio-item {
+	margin: 10px 0px;
+}
+/* Center all pagination elements */
+.pagination {
+    justify-content: center;
+}
+/* Ensure the pagination nav stretches across the row */
+.nav-pag {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.page-item.active .page-link {
+	background-color: #5BC0BE;
+    border-color: #eee;
+}
+.page-item.active .page-link:hover {
+	background-color: #6FFFE9;
+	color: #FFF;
+}
+/* Profielpagina */
+#profiel {
+	min-height: 480px;
+}
+.profile-pic {
+	max-width: 300px;
+	border-radius: 5px;
+	width: 100%;
+}
+/* Datingtips */
+.right {
+	border-radius: 2px;
+    float: right;
+    margin: 10px 0px 10px 10px;
+}
+.left {
+	border-radius: 2px;
+    float: left;
+    margin: 10px 10px 10px 0px;
+}
+/* Footer */
+footer {
+    color: #fff;
+    background-color: #0B132B;
+    text-align: center;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.footer-links {padding: 0;margin: 0;}
+.footer-links li {
+    display: inline-block;
+}
+.sub-text {
+    color: #eee;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.policy-links {
+    display: block;
+    margin-top: 5px;
+    font-weight: 400;
+}
+.policy-links a {
+    color: #ffffff;
+}
+/* Social */
+.addthis_inline_follow_toolbox {
+    margin-top: -5px;
+}
+/* Alert shown when profile data fails to load */
+.alert.data-error {
+    text-align: center;
+}

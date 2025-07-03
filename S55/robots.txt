@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://sex55.net/sitemap.xml
