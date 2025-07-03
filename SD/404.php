@@ -1,7 +1,7 @@
 <?php
 $base = __DIR__;
-	define("TITLE", "404 | Page not found");
-	include $base . '/includes/header.php';
+$pageTitle = '404 | Page not found | shemaledaten.net';
+include $base . '/includes/header.php';
 ?>
 
 <div class="container">

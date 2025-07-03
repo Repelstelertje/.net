@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Cookiebeleid');
 $canonical = 'https://18date.net/cookie-policy';
 $pageTitle = 'Cookiebeleid | 18Date.net';
 include $base . '/includes/header.php';

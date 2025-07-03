@@ -1,6 +1,5 @@
 <?php
 $base = __DIR__;
-define('TITLE', 'Partnerlinks');
 $canonical = 'https://sex55.net/partnerlinks';
 $pageTitle = 'Partnerlinks | sex55.net';
 include $base . '/includes/header.php';
