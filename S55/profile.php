@@ -18,14 +18,14 @@ include $base . '/includes/header.php';
             <h4>Over {{ profile.name }}:</h4>
             <p>{{ profile.aboutme }}</p>
             <h4>Persoonlijke informatie:</h4>
-            <p class="">
-              <label class="info">Provincie:</label> {{ profile.province }}<br>
-              <label class="info">Stad:</label> {{ profile.city }}<br>
-              <label class="info">Leeftijd:</label> {{ profile.age }}<br>
-              <label class="info">Relatiestatus:</label> {{ profile.relationship }}<br>
-              <label class="info">Lengte:</label> {{ profile.length }}<br>
-                <a :href="profile.url + '?ref=32'" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
-            </p>
+            <ul class="list-group">
+              <li class="list-group-item">Provincie: {{ profile.province }}</li>
+              <li class="list-group-item">Stad: {{ profile.city }}</li>
+              <li class="list-group-item">Leeftijd: {{ profile.age }}</li>
+              <li class="list-group-item">Relatiestatus: {{ profile.relationship }}</li>
+              <li class="list-group-item">Lengte: {{ profile.length }}</li>
+            </ul>
+            <a :href="profile.url + '?ref=32'" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
           </div>  
         </div>
       </div><!-- /.row -->
