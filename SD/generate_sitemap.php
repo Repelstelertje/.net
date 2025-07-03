@@ -1,5 +1,5 @@
 <?php
-// Simple sitemap generator for 18date.net
+// Simple sitemap generator for shemaledaten.net
 
 require_once __DIR__ . '/includes/config.php';
 
