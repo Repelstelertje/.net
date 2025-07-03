@@ -24,7 +24,7 @@ include $base . '/includes/header.php';
               <label class="info">Leeftijd:</label> {{ profile.age }}<br>
               <label class="info">Relatiestatus:</label> {{ profile.relationship }}<br>
               <label class="info">Lengte:</label> {{ profile.length }}<br>
-              <a :href="profile.url + '?ref=' + ref_id" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
+              <a :href="profile.url + '?ref=' + ref_id + '&ref=32'" class="btn btn-primary mt-1" id="send-msg-btn">Stuur gratis bericht</a>
             </p>
           </div>  
         </div>
@@ -37,25 +37,31 @@ include $base . '/includes/header.php';
   switch ($country) {
     case 'nl':
       $api_url = api_base('nl') . '/profile/get0/6/';
-      $ref_id = '32';
+      $ref_id = '80';
       break;
     case 'be':
       $api_url = api_base('be') . '/profile/get0/7/';
-      $ref_id = '32';
-      break;
-    case 'de':
-    case 'at':
-    case 'ch':
-      $api_url = api_base('de') . '/profile/get/';
-      $ref_id = '32';
+      $ref_id = '83';
       break;
     case 'uk':
-      $api_url = api_base('uk') . '/profile/get/';
-      $ref_id = '32';
+      $api_url = api_base('uk') . '/profile/get0/180/';
+      $ref_id = '180';
+      break;
+    case 'de':
+      $api_url = api_base('de') . '/profile/get0/280/';
+      $ref_id = '280';
+      break;
+    case 'at':
+      $api_url = api_base('at') . '/profile/get0/680/';
+      $ref_id = '680';
+      break;
+    case 'ch':
+      $api_url = api_base('ch') . '/profile/get0/580/';
+      $ref_id = '580';
       break;
     default:
       $api_url = api_base() . '/profile/get/';
-      $ref_id = '32';
+      $ref_id = '180';
   }
 ?>
 <script>
