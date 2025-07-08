@@ -40,6 +40,17 @@ RewriteRule ^shemale-zwitserland/?$ land.php?country=ch [L,QSA]
 # Profile slugs
 RewriteRule ^shemale-([a-z0-9-]+)/?$ profile.php?slug=$1 [L,QSA]
 
+# Redirect profile-varianten
+Redirect 301 /profile-nl.php /profile.php
+Redirect 301 /profile-be.php /profile.php
+
+# Redirect prov-varianten
+Redirect 301 /prov-nl.php /province.php
+Redirect 301 /prov-be.php /province.php
+
+# Redirect sexdates-{provincie} naar sexdate-{provincie}
+RewriteRule ^sexdates-(.*)$ /sexdate-$1 [R=301,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
