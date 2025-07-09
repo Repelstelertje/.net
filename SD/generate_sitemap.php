@@ -43,37 +43,56 @@ function add_url(array &$urls, $loc, $priority = '0.80')
  */
 function merge_into_sitemap(array $urls, $sitemap, $baseUrl)
 {
-    $dom = new DOMDocument('1.0', 'UTF-8');
-    $dom->formatOutput = true;
+    $ordered = [];
+    $seen = [];
 
     if (file_exists($sitemap)) {
-        $dom->load($sitemap);
-        $urlset = $dom->getElementsByTagName('urlset')->item(0);
-        if (!$urlset) {
-            $urlset = $dom->createElement('urlset');
-            $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-            $dom->appendChild($urlset);
+        $existingDom = new DOMDocument();
+        $existingDom->load($sitemap);
+        foreach ($existingDom->getElementsByTagName('url') as $urlNode) {
+            $locNode = $urlNode->getElementsByTagName('loc')->item(0);
+            if (!$locNode) {
+                continue;
+            }
+            $loc = trim($locNode->textContent);
+            if (isset($seen[$loc])) {
+                continue;
+            }
+            $lastmodNode = $urlNode->getElementsByTagName('lastmod')->item(0);
+            $priorityNode = $urlNode->getElementsByTagName('priority')->item(0);
+            $ordered[] = [
+                'loc' => $loc,
+                'lastmod' => $lastmodNode ? $lastmodNode->textContent : gmdate('c'),
+                'priority' => $priorityNode ? $priorityNode->textContent : '0.80',
+            ];
+            $seen[$loc] = true;
         }
-    } else {
-        $urlset = $dom->createElement('urlset');
-        $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
-        $dom->appendChild($urlset);
-    }
-
-    $existing = [];
-    foreach ($dom->getElementsByTagName('loc') as $locNode) {
-        $existing[$locNode->textContent] = true;
     }
 
     foreach ($urls as $u) {
         $locVal = rtrim($baseUrl, '/') . '/' . ltrim($u['loc'], '/');
-        if (isset($existing[$locVal])) {
+        if (isset($seen[$locVal])) {
             continue;
         }
+        $ordered[] = [
+            'loc' => $locVal,
+            'lastmod' => $u['lastmod'],
+            'priority' => $u['priority'],
+        ];
+        $seen[$locVal] = true;
+    }
+
+    $dom = new DOMDocument('1.0', 'UTF-8');
+    $dom->formatOutput = true;
+    $urlset = $dom->createElement('urlset');
+    $urlset->setAttribute('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9');
+    $dom->appendChild($urlset);
+
+    foreach ($ordered as $entry) {
         $url = $dom->createElement('url');
-        $url->appendChild($dom->createElement('loc', $locVal));
-        $url->appendChild($dom->createElement('lastmod', $u['lastmod']));
-        $url->appendChild($dom->createElement('priority', $u['priority']));
+        $url->appendChild($dom->createElement('loc', $entry['loc']));
+        $url->appendChild($dom->createElement('lastmod', $entry['lastmod']));
+        $url->appendChild($dom->createElement('priority', $entry['priority']));
         $urlset->appendChild($url);
     }
 
