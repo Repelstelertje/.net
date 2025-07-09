@@ -149,3 +149,4 @@ foreach (['partnerlinks', 'privacy', 'cookie-policy'] as $page) {
 }
 
 merge_into_sitemap($urls, __DIR__ . '/sitemap.xml', $baseUrl);
+echo sprintf("Sitemap updated with %d URLs\n", count($urls));
