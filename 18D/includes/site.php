@@ -18,6 +18,7 @@ function generate_canonical_meta(array $cfg, array $province = []) {
     $canonical = $base;
     $pageTitle = $cfg['default_title'];
     $ogImage = $cfg['default_og_image'];
+    $metaDescription = '';
 
     if (isset($_GET['item'])) {
         $item = filter_var($_GET['item'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -46,6 +47,8 @@ function generate_canonical_meta(array $cfg, array $province = []) {
         }
     } elseif (isset($_GET['id'])) {
         $id = filter_var($_GET['id'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $slugParam = isset($_GET['slug']) ?
+            filter_var($_GET['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) : '';
         $country = isset($_GET['country']) ? $_GET['country'] : '';
         switch ($country) {
             case 'nl':
@@ -68,6 +71,7 @@ function generate_canonical_meta(array $cfg, array $province = []) {
         $profile_json = @file_get_contents($api_url . $id);
         $profile_name = '';
         $profile_img = '';
+        $profile_about = '';
         if ($profile_json) {
             $data = json_decode($profile_json, true);
             if (isset($data['profile']['name'])) {
@@ -76,15 +80,23 @@ function generate_canonical_meta(array $cfg, array $province = []) {
             if (isset($data['profile']['profile_image_big'])) {
                 $profile_img = $data['profile']['profile_image_big'];
             }
+            if (isset($data['profile']['aboutme'])) {
+                $profile_about = $data['profile']['aboutme'];
+            }
         }
         if ($profile_name) {
             $slug = slugify($profile_name);
-            if ($slug) {
-                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slug;
+            if ($slugParam) {
+                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slugParam . '?id=' . $id;
+            } elseif ($slug) {
+                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slug . '?id=' . $id;
             } else {
                 $canonical = $base . '/profile?id=' . $id;
             }
-            $pageTitle = 'Date ' . htmlspecialchars($profile_name, ENT_QUOTES, 'UTF-8');
+            $pageTitle = $cfg['profile_title_prefix'] . ' ' . htmlspecialchars($profile_name, ENT_QUOTES, 'UTF-8');
+            if ($profile_about) {
+                $metaDescription = $profile_about;
+            }
         } else {
             $canonical = $base . '/profile?id=' . $id;
             $pageTitle = $cfg['missing_profile_prefix'] . ' ' . $id . ' | ' . $cfg['site_name'];
@@ -95,13 +107,13 @@ function generate_canonical_meta(array $cfg, array $province = []) {
     } elseif (isset($_GET['slug'])) {
         $slugParam = filter_var($_GET['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $canonical = $base . '/' . $cfg['slug_prefix'] . '-' . $slugParam;
-        $pageTitle = 'Date ' . $slugParam . ' | ' . $cfg['site_name'];
+        $pageTitle = $cfg['profile_title_prefix'] . ' ' . $slugParam . ' | ' . $cfg['site_name'];
     }
 
     $canonical = preg_replace('/([?&])ref=[^&]*(&|$)/', '$1', $canonical);
     $canonical = rtrim($canonical, '?&');
 
-    return [$canonical, $pageTitle, $ogImage];
+    return [$canonical, $pageTitle, $ogImage, $metaDescription];
 }
 
 function output_meta_tags($canonical, $pageTitle, $description, $ogImage) {

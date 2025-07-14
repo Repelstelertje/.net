@@ -22,6 +22,15 @@ function getSlugFromPath(){
     return match ? match[1] : null;
 }
 
+// Remove the ref parameter from a query string and return the remaining
+// search portion (including the leading '?') or an empty string if none remain
+function stripRefFromSearch() {
+    var params = new URLSearchParams(window.location.search);
+    params.delete('ref');
+    var s = params.toString();
+    return s ? '?' + s : '';
+}
+
 var profiel= new Vue({
     router,
     el: "#profiel",
@@ -74,7 +83,7 @@ var profiel= new Vue({
                     }
                     var slug = slugify(that.profile.name || '');
                     if(slug){
-                        var newUrl = '/shemale-' + slug;
+                        var newUrl = '/shemale-' + slug + stripRefFromSearch();
                         var link = document.querySelector('link[rel=canonical]');
                         if(link){
                             link.setAttribute('href', 'https://shemaledaten.net' + newUrl);
