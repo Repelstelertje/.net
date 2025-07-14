@@ -86,19 +86,33 @@ function generate_canonical_meta(array $cfg, array $province = []) {
         }
         if ($profile_name) {
             $slug = slugify($profile_name);
+            $params = [];
+            if ($country) {
+                $params[] = 'country=' . urlencode($country);
+            }
+            $params[] = 'id=' . urlencode($id);
+            $query = implode('&', $params);
+
             if ($slugParam) {
-                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slugParam . '?id=' . $id;
+                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slugParam . '?' . $query;
             } elseif ($slug) {
-                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slug . '?id=' . $id;
+                $canonical = $base . '/' . $cfg['profile_prefix'] . '-' . $slug . '?' . $query;
             } else {
-                $canonical = $base . '/profile?id=' . $id;
+                $canonical = $base . '/profile?' . $query;
             }
             $pageTitle = $cfg['profile_title_prefix'] . ' ' . htmlspecialchars($profile_name, ENT_QUOTES, 'UTF-8');
             if ($profile_about) {
                 $metaDescription = $profile_about;
             }
         } else {
-            $canonical = $base . '/profile?id=' . $id;
+            $params = [];
+            if ($country) {
+                $params[] = 'country=' . urlencode($country);
+            }
+            $params[] = 'id=' . urlencode($id);
+            $query = implode('&', $params);
+
+            $canonical = $base . '/profile?' . $query;
             $pageTitle = $cfg['missing_profile_prefix'] . ' ' . $id . ' | ' . $cfg['site_name'];
         }
         if ($profile_img) {
