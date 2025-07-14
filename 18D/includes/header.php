@@ -18,14 +18,18 @@
     'item_page_title_prefix' => 'Sexdate',
     'slug_prefix' => 'date',
     'profile_prefix' => 'date',
+    'profile_title_prefix' => 'Date',
     'missing_profile_prefix' => 'Sexdate met',
     'tips_title_prefix' => 'Sexdatingtips',
   ];
 
-  list($generatedCanonical, $generatedPageTitle, $generatedOgImage) = generate_canonical_meta($cfg, isset($province) ? $province : []);
+  list($generatedCanonical, $generatedPageTitle, $generatedOgImage, $generatedMetaDescription) = generate_canonical_meta($cfg, isset($province) ? $province : []);
   $canonical = isset($canonical) ? $canonical : $generatedCanonical;
   $pageTitle = isset($pageTitle) ? $pageTitle : $generatedPageTitle;
   $ogImage   = isset($ogImage) ? $ogImage : $generatedOgImage;
+  if (!isset($metaDescription) && $generatedMetaDescription) {
+    $metaDescription = $generatedMetaDescription;
+  }
 
 ?>
 
