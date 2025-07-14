@@ -16,7 +16,7 @@
     'item_prefix' => 'shemale',
     'item_remove_regex' => '/^(?:sexdate|shemale)-/',
     'item_page_title_prefix' => 'Shemale',
-    'slug_prefix' => 'sexdate',
+    'slug_prefix' => 'shemale',
     'profile_prefix' => 'shemale',
     'profile_title_prefix' => 'Shemale',
     'missing_profile_prefix' => 'Shemale',

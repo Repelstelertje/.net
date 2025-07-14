@@ -95,7 +95,9 @@ function generate_canonical_meta(array $cfg, array $province = []) {
             }
             $pageTitle = $cfg['profile_title_prefix'] . ' ' . htmlspecialchars($profile_name, ENT_QUOTES, 'UTF-8');
             if ($profile_about) {
-                $metaDescription = $profile_about;
+                $cleanAbout = strip_tags($profile_about);
+                $cleanAbout = html_entity_decode($cleanAbout, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $metaDescription = mb_substr(trim($cleanAbout), 0, 160);
             }
         } else {
             $canonical = $base . '/profile?id=' . $id;
