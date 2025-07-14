@@ -5,6 +5,12 @@ require_once __DIR__ . '/includes/config.php';
 
 $baseUrl = $BASE_URL;
 
+// Determine the prefix used for profile pages based on domain
+$profilePrefix = 'date-';
+if (strpos($baseUrl, 'shemaledaten.net') !== false) {
+    $profilePrefix = 'shemale-';
+}
+
 /**
  * Fetch profile slugs from the remote API.
  * Expects JSON {"slugs": ["foo", "bar", ...]}
@@ -26,19 +32,18 @@ function fetch_profile_slugs($country)
     return $data['slugs'];
 }
 
-function add_url(array &$urls, $loc, $priority = '0.80')
+function add_url(array &$urls, $loc)
 {
     $urls[] = [
         'loc' => $loc,
         'lastmod' => gmdate('c'),
-        'priority' => $priority,
     ];
 }
 
 /**
  * Merge generated URLs into the existing sitemap without duplicating entries.
  *
- * @param array  $urls       Array with loc/lastmod/priority keys
+ * @param array  $urls       Array with loc and lastmod keys
  * @param string $sitemap    Path to sitemap.xml
  */
 function merge_into_sitemap(array $urls, $sitemap, $baseUrl)
@@ -59,11 +64,9 @@ function merge_into_sitemap(array $urls, $sitemap, $baseUrl)
                 continue;
             }
             $lastmodNode = $urlNode->getElementsByTagName('lastmod')->item(0);
-            $priorityNode = $urlNode->getElementsByTagName('priority')->item(0);
             $ordered[] = [
                 'loc' => $loc,
                 'lastmod' => $lastmodNode ? $lastmodNode->textContent : gmdate('c'),
-                'priority' => $priorityNode ? $priorityNode->textContent : '0.80',
             ];
             $seen[$loc] = true;
         }
@@ -77,7 +80,6 @@ function merge_into_sitemap(array $urls, $sitemap, $baseUrl)
         $ordered[] = [
             'loc' => $locVal,
             'lastmod' => $u['lastmod'],
-            'priority' => $u['priority'],
         ];
         $seen[$locVal] = true;
     }
@@ -92,7 +94,6 @@ function merge_into_sitemap(array $urls, $sitemap, $baseUrl)
         $url = $dom->createElement('url');
         $url->appendChild($dom->createElement('loc', $entry['loc']));
         $url->appendChild($dom->createElement('lastmod', $entry['lastmod']));
-        $url->appendChild($dom->createElement('priority', $entry['priority']));
         $urlset->appendChild($url);
     }
 
@@ -121,11 +122,11 @@ foreach ($countries as $country => $info) {
         if (($country === 'nl' || $country === 'be') && $slugKey === 'limburg') {
             $slug = 'sexdate-limburg-' . $country;
         }
-        add_url($urls, $slug, '0.64');
+        add_url($urls, $slug);
     }
 
     foreach (fetch_profile_slugs($country) as $profileSlug) {
-        add_url($urls, 'date-' . $profileSlug, '0.50');
+        add_url($urls, $profilePrefix . $profileSlug);
     }
 }
 
