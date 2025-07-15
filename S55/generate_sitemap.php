@@ -13,8 +13,10 @@ require __DIR__ . '/includes/array_tips.php';
 $baseUrl = $BASE_URL;
 
 $profilePrefix = 'date-';
+$slugPrefix = 'sexdate-';
 if (strpos($baseUrl, 'shemaledaten.net') !== false) {
     $profilePrefix = 'shemale-';
+    $slugPrefix = 'shemale-';
 }
 
 $urls = [];
@@ -24,21 +26,21 @@ foreach ($static as $page) {
 }
 
 $countryMap = [
-    'nl' => ['slug' => 'sexdate-nederland',       'prov' => $nl],
-    'be' => ['slug' => 'sexdate-belgie',          'prov' => $be],
-    'uk' => ['slug' => 'sexdate-verenigd-koninkrijk', 'prov' => $uk],
-    'de' => ['slug' => 'sexdate-duitsland',       'prov' => $de],
-    'at' => ['slug' => 'sexdate-oostenrijk',      'prov' => $at],
-    'ch' => ['slug' => 'sexdate-zwitserland',     'prov' => $ch],
+    'nl' => ['slug' => $slugPrefix . 'nederland',       'prov' => $nl],
+    'be' => ['slug' => $slugPrefix . 'belgie',          'prov' => $be],
+    'uk' => ['slug' => $slugPrefix . 'verenigd-koninkrijk', 'prov' => $uk],
+    'de' => ['slug' => $slugPrefix . 'duitsland',       'prov' => $de],
+    'at' => ['slug' => $slugPrefix . 'oostenrijk',      'prov' => $at],
+    'ch' => ['slug' => $slugPrefix . 'zwitserland',     'prov' => $ch],
 ];
 
 $profileUrls = [];
 foreach ($countryMap as $code => $info) {
     $urls[] = $baseUrl . '/' . $info['slug'];
     foreach ($info['prov'] as $slug => $prov) {
-        $provSlug = 'sexdate-' . $slug;
+        $provSlug = $slugPrefix . $slug;
         if (($code === 'nl' || $code === 'be') && $slug === 'limburg') {
-            $provSlug = 'sexdate-limburg-' . $code;
+            $provSlug = $slugPrefix . 'limburg-' . $code;
         }
         $urls[] = $baseUrl . '/' . $provSlug;
 
