@@ -21,14 +21,23 @@ function merge_into_sitemap(array $urls, string $sitemapPath): int {
     $existing = [];
     foreach ($xpath->query('//sm:url') as $node) {
         $locNode = $xpath->query('sm:loc', $node)->item(0);
-        if ($locNode) {
-            $loc = $locNode->textContent;
-            if (isset($existing[$loc])) {
-                $node->parentNode->removeChild($node);
-                continue;
-            }
-            $existing[$loc] = true;
+        if (!$locNode) {
+            $node->parentNode->removeChild($node);
+            continue;
         }
+
+        $loc = trim($locNode->textContent);
+        if ($loc === '') {
+            $node->parentNode->removeChild($node);
+            continue;
+        }
+
+        if (isset($existing[$loc])) {
+            $node->parentNode->removeChild($node);
+            continue;
+        }
+
+        $existing[$loc] = true;
     }
 
     $lastMod = date('c');
