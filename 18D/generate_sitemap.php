@@ -71,5 +71,9 @@ foreach ($profileUrls as $url) {
     $urls[] = $url;
 }
 
+$urls = array_filter($urls, static function ($u) {
+    return is_string($u) && trim($u) !== '';
+});
+
 $added = merge_into_sitemap($urls, __DIR__ . '/sitemap.xml');
 echo "Added $added new URLs to sitemap\n";

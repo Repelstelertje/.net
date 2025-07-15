@@ -34,7 +34,7 @@ function merge_into_sitemap(array $urls, string $sitemapPath): int {
     $lastMod = date('c');
     $added = 0;
     foreach (array_unique($urls) as $loc) {
-        if ($loc === '' || isset($existing[$loc])) {
+        if (!is_string($loc) || trim($loc) === '' || isset($existing[$loc])) {
             continue;
         }
         $urlEl = $doc->createElementNS($namespace, 'url');
